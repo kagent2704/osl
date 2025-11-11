@@ -1,0 +1,226 @@
+🧮 Arithmetic and Numbers
+1️⃣ Factorial of a number
+
+Logic: multiply numbers from 1 to n
+
+read n
+fact=1
+for ((i=1; i<=n; i++))
+do
+  fact=$((fact * i))
+done
+echo "Factorial = $fact"
+
+2️⃣ Check even or odd
+read n
+if [ $((n % 2)) -eq 0 ]
+then
+  echo "Even"
+else
+  echo "Odd"
+fi
+
+3️⃣ Sum of digits
+read n
+sum=0
+while [ $n -gt 0 ]
+do
+  digit=$((n % 10))
+  sum=$((sum + digit))
+  n=$((n / 10))
+done
+echo "Sum = $sum"
+
+4️⃣ Reverse a number
+read n
+rev=0
+while [ $n -gt 0 ]
+do
+  digit=$((n % 10))
+  rev=$((rev * 10 + digit))
+  n=$((n / 10))
+done
+echo "Reversed = $rev"
+
+5️⃣ Check palindrome number
+read n
+temp=$n
+rev=0
+while [ $n -gt 0 ]
+do
+  digit=$((n % 10))
+  rev=$((rev * 10 + digit))
+  n=$((n / 10))
+done
+if [ $rev -eq $temp ]; then echo "Palindrome"; else echo "Not palindrome"; fi
+
+🔤 Strings
+6️⃣ Reverse a string
+read str
+len=${#str}
+rev=""
+for ((i=$len-1; i>=0; i--))
+do
+  rev="$rev${str:$i:1}"
+done
+echo "Reverse: $rev"
+
+7️⃣ Count characters, words, lines in a file
+read file
+echo "Lines: $(wc -l < $file)"
+echo "Words: $(wc -w < $file)"
+echo "Chars: $(wc -m < $file)"
+
+8️⃣ Check if a string is palindrome
+read str
+rev=$(echo $str | rev)
+if [ "$str" = "$rev" ]; then echo "Palindrome"; else echo "Not palindrome"; fi
+
+📂 Files and Directories
+9️⃣ Check if file exists and is readable
+read file
+if [ -f "$file" -a -r "$file" ]; then
+  echo "File exists and readable"
+else
+  echo "File missing or unreadable"
+fi
+
+🔟 Display file contents line by line
+while read line
+do
+  echo "$line"
+done < filename.txt
+
+11️⃣ Rename file
+read old new
+mv "$old" "$new"
+
+12️⃣ Display files sorted by size
+ls -lhS
+
+🧾 Menu-Driven Programs
+13️⃣ Basic menu template
+while true
+do
+  echo "1. Date  2. Calendar  3. Exit"
+  read ch
+  case $ch in
+    1) date ;;
+    2) cal ;;
+    3) break ;;
+    *) echo "Invalid" ;;
+  esac
+done
+
+14️⃣ Menu for file operations (mini version of your filemanage.sh)
+
+Option 1: create file → touch
+
+Option 2: view file → cat
+
+Option 3: delete → rm
+
+Option 4: list → ls -l
+
+Use a while + case block (exactly like your script).
+
+🔁 Loops and Patterns
+15️⃣ Print 1 to n
+read n
+for ((i=1; i<=n; i++))
+do
+  echo $i
+done
+
+16️⃣ Multiplication table
+read n
+for ((i=1; i<=10; i++))
+do
+  echo "$n x $i = $((n * i))"
+done
+
+17️⃣ Fibonacci sequence (you already have it)
+a=0; b=1
+read n
+for ((i=0; i<n; i++))
+do
+  echo -n "$a "
+  fn=$((a + b))
+  a=$b
+  b=$fn
+done
+
+🔍 System / Utility Scripts
+18️⃣ Display system info
+echo "User: $(whoami)"
+echo "Date: $(date)"
+echo "Current Dir: $(pwd)"
+
+19️⃣ Check disk usage
+df -h
+
+20️⃣ Display running processes
+ps -e
+
+📦 Backup / Automation
+21️⃣ Backup all .txt files (yours)
+
+Core commands:
+
+mkdir -p backup
+cp *.txt backup/
+tar -czf backup_$(date +%F_%T).tar.gz backup
+
+22️⃣ Delete temp files older than 7 days
+find /tmp -type f -mtime +7 -delete
+
+🔄 Decision and Comparison
+23️⃣ Compare two numbers
+read a b
+if [ $a -gt $b ]; then echo "$a greater"; else echo "$b greater"; fi
+
+24️⃣ Greatest of three numbers
+read a b c
+if [ $a -ge $b -a $a -ge $c ]; then
+  echo "$a largest"
+elif [ $b -ge $c ]; then
+  echo "$b largest"
+else
+  echo "$c largest"
+fi
+
+25️⃣ Check login users
+who
+
+💾 File Handling Questions (Trickier)
+26️⃣ Append content of one file into another
+cat file1 >> file2
+
+27️⃣ Display lines containing a pattern
+grep "pattern" filename
+
+28️⃣ Count occurrences of a word
+grep -o "word" filename | wc -l
+
+🧠 Common practical viva prompts
+
+“Write a script to find the largest of three numbers.”
+
+“Write a script to check if a given year is leap year.”
+
+read y
+if (( (y%400==0) || (y%4==0 && y%100!=0) ))
+then echo "Leap"
+else echo "Not leap"
+fi
+
+
+“Write a script to copy contents of one file to another.”
+→ cp file1 file2
+
+“Write a script to show system information.”
+→ Combine date, whoami, hostname, df -h, free -m.
+
+If you practice writing the ones above (factorial, palindrome, file check, pattern printing, and basic menu), you’ll be ready for 95% of the coding questions they can throw at you.
+
+Would you like me to filter this list in
